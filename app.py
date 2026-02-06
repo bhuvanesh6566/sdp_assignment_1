@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from config import Config
 from models import db, User, Attendance
 from utils import get_face_encoding_from_file, identify_user
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object(Config)
 db.init_app(app)
 

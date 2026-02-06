@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Face Attendance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">◇</span>
+        <h1>Face Attendance</h1>
+      </div>
+      <p class="tagline">Register once. Check in with your face.</p>
+    </header>
+
+    <nav class="tabs">
+      <button type="button" class="tab active" data-tab="register">Register</button>
+      <button type="button" class="tab" data-tab="attendance">Mark Attendance</button>
+      <button type="button" class="tab" data-tab="logs">Attendance Logs</button>
+    </nav>
+
+    <main class="content">
+      <!-- Register -->
+      <section id="register" class="panel active">
+        <div class="card">
+          <h2>Register New User</h2>
+          <p class="hint">Upload a clear photo of your face. One face per image.</p>
+          <form id="register-form" class="form">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" required placeholder="e.g. John Doe" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="john@example.com" />
+            </div>
+            <div class="field">
+              <label for="register-image">Face photo</label>
+              <div class="file-wrap">
+                <input type="file" id="register-image" name="image" accept="image/*" required />
+                <span class="file-label">Choose image</span>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="register-btn">Register</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Mark Attendance -->
+      <section id="attendance" class="panel">
+        <div class="card">
+          <h2>Mark Attendance</h2>
+          <p class="hint">Use your camera or upload an image to check in.</p>
+          <div class="attendance-options">
+            <div class="option-box">
+              <div class="camera-wrap">
+                <video id="camera-preview" autoplay playsinline muted></video>
+                <canvas id="capture-canvas" hidden></canvas>
+              </div>
+              <div class="camera-actions">
+                <button type="button" class="btn btn-secondary" id="start-camera">Start camera</button>
+                <button type="button" class="btn btn-primary" id="capture-btn" disabled>Capture & check in</button>
+              </div>
+            </div>
+            <div class="divider">or</div>
+            <div class="option-box">
+              <label for="attendance-image" class="upload-label">Upload image instead</label>
+              <input type="file" id="attendance-image" accept="image/*" />
+              <button type="button" class="btn btn-secondary" id="submit-attendance-file" disabled>Submit image</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Logs -->
+      <section id="logs" class="panel">
+        <div class="card">
+          <h2>Attendance Logs</h2>
+          <p class="hint">Recent check-ins.</p>
+          <div class="logs-toolbar">
+            <button type="button" class="btn btn-secondary" id="refresh-logs">Refresh</button>
+          </div>
+          <div class="logs-wrap">
+            <table class="logs-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody id="logs-body">
+                <tr><td colspan="2" class="empty">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
